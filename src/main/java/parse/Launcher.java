@@ -64,8 +64,12 @@ public class Launcher {
     sb.append(arrConll[5]).append("\t"); // FEATS
 
     // arrTsv[5].split("|");
-    sb.append(arrTsv[7].replaceAll("1-", "")).append("\t").append(arrTsv[5]).append("\t"); // HEAD,
-                                                                                           // DEPREL
+    if (!arrTsv[5].equals("root")) {
+      sb.append(arrTsv[7].replaceAll("1-", "")).append("\t").append(arrTsv[5]).append("\t"); // HEAD,
+                                                                                             // DEPREL
+    } else {
+      sb.append(0).append("\t").append(arrTsv[5]).append("\t");
+    }
     sb.append(arrConll[8]).append("\t").append(arrConll[9]);// DEPS, MISC
 
     return sb.toString();
