@@ -14,7 +14,7 @@ public class MergeConll {
 
   public static void main(String[] args) throws IOException {
     File folderConll = new File("C://Users//Ivan//Desktop//Curation//curation");
-    String fileConll = "C://Users//Ivan//Desktop//finish_conll//res.conll";
+    String fileConll = "C://Users//Ivan//Desktop//finish_conll//forums_and_music.conll";
     File[] folders = folderConll.listFiles();
     // FileUtils.
     for (File folder : folders) {
