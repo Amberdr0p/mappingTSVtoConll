@@ -18,7 +18,7 @@ public class ConverterKKtoUD {
 
   public static void main(String[] args) throws IOException {
     String pathKKConll = "C://Users//Ivan//Desktop//conll_convert//resKK.conll";
-    String pathResConll = "C://Users//Ivan//Desktop//conll_convert//res1.conll";
+    String pathResConll = "C://Users//Ivan//Desktop//conll_convert//res.conll";
 
     List<ArrayList<String[]>> listConll = readFile(pathKKConll, 0);
     List<ArrayList<String[]>> resConll = processingConveting(listConll);

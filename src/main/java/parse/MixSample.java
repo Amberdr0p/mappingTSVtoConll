@@ -19,9 +19,9 @@ public class MixSample {
 
   public static void main(String[] args) throws IOException {
     HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>();
-    readFile("C://Users//Ivan//Desktop//finish_conll//res_and_MF.conll", map);
+    readFile("C://Users//Ivan//Desktop//ud-treebanks-conll2017//UD_Russian-SynTagRus//ru_syntagrus-ud-train.conllu", map);
 
-    List<Integer> listTest = mixRandom(map.size(), 120);
+    List<Integer> listTest = mixRandom(map.size(), 12000);
 
     writeFiles(map, listTest);
   }
@@ -73,8 +73,8 @@ public class MixSample {
           trainSample.add("\n");
         }
     }
-    writeFile("C://Users//Ivan//Desktop//finish_conll//resMF_cut.conll", trainSample);
-    writeFile("C://Users//Ivan//Desktop//finish_conll//resMF_test.conll", testSample);
+    writeFile("C://Users//Ivan//Desktop//ud-SytTagRus1.conllu", trainSample);
+    writeFile("C://Users//Ivan//Desktop//ud-SytTagRus2.conllu", testSample);
     // writeFile();
   }
 
