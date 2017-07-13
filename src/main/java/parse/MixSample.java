@@ -18,10 +18,10 @@ import java.util.Map.Entry;
 public class MixSample {
 
   public static void main(String[] args) throws IOException {
-    HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>();
-    readFile("C://Users//Ivan//Desktop//ud-treebanks-conll2017//UD_Russian-SynTagRus//ru_syntagrus-ud-train.conllu", map);
+    HashMap<Integer, List<String>> map = new HashMap<Integer, List<String>>(); 
+    readFile("C://Users//Ivan//Desktop//res_ru_syntagrus-ud-train.conll", map);
 
-    List<Integer> listTest = mixRandom(map.size(), 12000);
+    List<Integer> listTest = mixRandom(map.size(), 25000);
 
     writeFiles(map, listTest);
   }
@@ -73,8 +73,8 @@ public class MixSample {
           trainSample.add("\n");
         }
     }
-    writeFile("C://Users//Ivan//Desktop//ud-SytTagRus1.conllu", trainSample);
-    writeFile("C://Users//Ivan//Desktop//ud-SytTagRus2.conllu", testSample);
+    writeFile("C://Users//Ivan//Desktop//res_ud-SytTagRus1.conllu", trainSample);
+    writeFile("C://Users//Ivan//Desktop//res_ud-SytTagRus2.conllu", testSample);
     // writeFile();
   }
 

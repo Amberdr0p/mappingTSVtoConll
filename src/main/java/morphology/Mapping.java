@@ -13,19 +13,22 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Mapping {
 
+  private static List<String> uniqeTags = new ArrayList<String>();
+
   private static Map<String, List<String>> feats = new HashMap<String, List<String>>();
 
   private static Map<String, List<String>> featsVal = new HashMap<String, List<String>>();
 
   public static void main(String[] args) throws IOException {
-    String pathConll = "C://Users//Ivan//Desktop//ud-SytTagRus2.conllu";
-    String pathResConll = "C://Users//Ivan//Desktop//resUdSynTagRus2.conll";
+    String pathConll = "C://Users//Ivan//Desktop//ru_syntagrus-ud-train.conllu";
+    String pathResConll = "C://Users//Ivan//Desktop//res_ru_syntagrus-ud-train.conll";
 
     List<ArrayList<String[]>> listConll = readFile(pathConll, 0);
     List<ArrayList<String[]>> resConll = processingConveting(listConll);
@@ -40,8 +43,11 @@ public class Mapping {
         if (!fs.equals("_")) {
           String[] arrfs = fs.split("\\|");
           List<String> ls = new ArrayList<String>();
+          List<String> lsVal = new ArrayList<String>();
           for (String f : arrfs) {
-            ls.add(f.split("=")[0]);
+            String[] sss = f.split("=");
+            ls.add(sss[0]);
+            lsVal.add(sss[1]);
           }
           if (feats.containsKey(tag)) {
             List<String> arrFeats = feats.get(tag);
@@ -53,9 +59,41 @@ public class Mapping {
           } else {
             feats.put(tag, ls);
           }
+          for (int i = 0; i < lsVal.size(); i++) {
+            if (featsVal.containsKey(ls.get(i))) {
+              List<String> lll = featsVal.get(ls.get(i));
+              // int ind = lll.indexOf(lsVal.get(i));
+              if (!lll.contains(lsVal.get(i))) {
+                lll.add(lsVal.get(i));
+                // val = lll.size();
+                // } else {
+                // val = ind + 1;
+                // }
+              }
+            } else {
+              List<String> lll1 = new ArrayList<String>();
+              lll1.add(lsVal.get(i));
+              featsVal.put(ls.get(i), lll1);
+              // val = 1;
+            }
+          }
+        } else if (!uniqeTags.contains(tag)) {
+          uniqeTags.add(tag);
         }
       }
     }
+
+    for (Map.Entry<String, List<String>> entry : feats.entrySet()) {
+      Collections.sort(entry.getValue());
+      System.out.println(entry.getKey() + entry.getValue());
+    }
+    System.out.println();
+    for (Map.Entry<String, List<String>> entry : featsVal.entrySet()) {
+      Collections.sort(entry.getValue());
+      System.out.println(entry.getKey() + entry.getValue());
+    }
+
+
     for (ArrayList<String[]> conll1 : listConll) {
       for (String[] row1 : conll1) {
         String tag1 = row1[3];
@@ -68,40 +106,37 @@ public class Mapping {
           for (String f1 : arrfs) {
             String[] arrayF = f1.split("=");
             int index = listF.indexOf(arrayF[0]);
-            // System.out.println(tag1);
-            // System.out.println(listF);
-            // System.out.println(arrayF[0]);
-            int val = 1;
-            if (featsVal.containsKey(arrayF[0])) {
-              List<String> lll = featsVal.get(arrayF[0]);
-              int ind = lll.indexOf(arrayF[1]);
-              if (ind == -1) {
-                lll.add(arrayF[1]);
-                val = lll.size();
-              } else {
-                val = ind + 1;
-              }
-            } else {
-              List<String> lll1 = new ArrayList<String>();
-              lll1.add(arrayF[1]);
-              featsVal.put(arrayF[0], lll1);
-              val = 1;
-            }
+            // int val = 1;
+            List<String> lll = featsVal.get(arrayF[0]);
+            int val = lll.indexOf(arrayF[1]) + 1;
+
+            /*
+             * if (featsVal.containsKey(arrayF[0])) { List<String> lll = featsVal.get(arrayF[0]);
+             * int ind = lll.indexOf(arrayF[1]); if (ind == -1) { lll.add(arrayF[1]); val =
+             * lll.size(); } else { val = ind + 1; } } else { List<String> lll1 = new
+             * ArrayList<String>(); lll1.add(arrayF[1]); featsVal.put(arrayF[0], lll1); val = 1; }
+             */
             value.replace(index, index + 1, String.valueOf(val));
           }
-          row1[3] = row1[3] + value;
+          String resVal = row1[3] + value;
+          if (!uniqeTags.contains(resVal)) {
+            uniqeTags.add(resVal);
+          }
+          row1[3] = resVal;
         }
       }
     }
 
-
-    for (Map.Entry<String, List<String>> entry : feats.entrySet()) {
-      System.out.println(entry.getKey() + "/" + entry.getValue());
+    Collections.sort(uniqeTags);
+    for (String taggg : uniqeTags) {
+      System.out.println(taggg);
     }
-    System.out.println();
-    for (Map.Entry<String, List<String>> entry : featsVal.entrySet()) {
-      System.out.println(entry.getKey() + "/" + entry.getValue());
-    }
+    /*
+     * for (Map.Entry<String, List<String>> entry : feats.entrySet()) {
+     * System.out.println(entry.getKey() + "/" + entry.getValue()); } System.out.println(); for
+     * (Map.Entry<String, List<String>> entry : featsVal.entrySet()) {
+     * System.out.println(entry.getKey() + "/" + entry.getValue()); }
+     */
 
     return listConll;
   }
@@ -110,7 +145,7 @@ public class Mapping {
     Writer writer = null;
     try {
       writer =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, true), "utf-8"));
+          new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path, false), "utf-8"));
       for (ArrayList<String[]> conll : resConll) {
         for (String[] line : conll) {
           StringBuilder lineRes = new StringBuilder();
