@@ -23,8 +23,8 @@ public class GenDictionary {
   static Map<String, List<Pair<String, String>>> dict = new HashMap<String, List<Pair<String, String>>>();
 
   public static void main(String[] args) throws IOException {
-    String pathConll = "C://Users//Ivan//Desktop//res_ru_syntagrus-ud-train.conll";
-    String pathResConll = "C://Users//Ivan//Desktop//dict1.tsv";
+    String pathConll = "C://Users//Ivan//Desktop//all_syntagrus.conllu";
+    String pathResConll = "C://Users//Ivan//Desktop//dict.tsv";
     List<ArrayList<String[]>> conll = readFile(pathConll);
     List<String> res = processingFile(conll);
     writeToEndFile(pathResConll, res);

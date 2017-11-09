@@ -27,8 +27,8 @@ public class Mapping {
   private static Map<String, List<String>> featsVal = new HashMap<String, List<String>>();
 
   public static void main(String[] args) throws IOException {
-    String pathConll = "C://Users//Ivan//Desktop//ru_syntagrus-ud-train.conllu";
-    String pathResConll = "C://Users//Ivan//Desktop//res_ru_syntagrus-ud-train.conll";
+    String pathConll = "C://Users//Ivan//Desktop//all_syntagrus.conllu";//"C://Users//Ivan//Desktop//ru_syntagrus-ud-train.conllu";
+    String pathResConll = "C://Users//Ivan//Desktop//res_all_syntagrus.conll";
 
     List<ArrayList<String[]>> listConll = readFile(pathConll, 0);
     List<ArrayList<String[]>> resConll = processingConveting(listConll);

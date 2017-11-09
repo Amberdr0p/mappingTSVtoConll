@@ -16,8 +16,8 @@ import java.util.List;
 public class ForTagger {
   
   public static void main(String[] args) throws IOException {
-    String pathConll = "C://Users//Ivan//Desktop//ru_syntagrus-ud-train.conllu";
-    String pathResConll = "C://Users//Ivan//Desktop//res_without_codes_tags.txt";
+    String pathConll = "C://Users//Ivan//Desktop//res_dev_syntagrus.conll";
+    String pathResConll = "C://Users//Ivan//Desktop//res_MFdev_tags.txt";
     
     List<ArrayList<String[]>> conll = readFile(pathConll);
     // List<String> res = processingFile(pathConll);
