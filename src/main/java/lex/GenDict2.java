@@ -25,8 +25,6 @@ public class GenDict2 {
       new HashMap<String, List<Pair<String, String>>>();
 
   public static void main(String[] args) throws IOException {
-    // String tsv = "C://Users//Ivan//Desktop//dict.tsv";
-    // MaxentTagger tagger = new MaxentTagger("russian-ud-pos-13-07-2017.tagger");
     String pathFile = "C://Users//Ivan//Desktop//res_MFdev_tags.txt";
     String pathResFile = "C://Users//Ivan//Desktop//resdevMF1.txt";
     MaxentTagger tagger = new MaxentTagger("C://Users//Ivan//Desktop//russian-ud-mf.tagger");
@@ -34,13 +32,6 @@ public class GenDict2 {
 
     List<String> res = procFile(file, tagger);
     writeToEndFile(pathResFile, res);
-    /*
-     * String pathFile = "C://Users//Ivan//Desktop//odict.csv"; String pathResFile =
-     * "C://Users//Ivan//Desktop//dict_all.tsv";
-     * 
-     * loadTsv(tsv); List<String> file = readFile(pathFile); List<String> res = processingFile(file,
-     * tagger); writeToEndFile(pathResFile, res);
-     */
   }
 
   public static List<String> procFile(List<String> file, MaxentTagger tagger) {
@@ -165,7 +156,6 @@ public class GenDict2 {
         try {
           writer.close();
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
       }

@@ -218,7 +218,6 @@ public class CompareConll {
             list = new ArrayList<String[]>();
           }
         } else {
-          // String[] arrConll = line.split("\t");
           list.add(line.split("\t"));
         }
       }

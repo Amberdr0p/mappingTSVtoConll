@@ -78,7 +78,6 @@ public class GenDictionary {
         try {
           writer.close();
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
       }
@@ -99,7 +98,6 @@ public class GenDictionary {
             list = new ArrayList<String[]>();
           }
         } else {
-          // String[] arrConll = line.split("\t");
           list.add(line.split("\t"));
         }
       }

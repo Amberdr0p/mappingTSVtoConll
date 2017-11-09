@@ -25,14 +25,6 @@ public class ConverterKKtoUD {
     writeToEndFile(pathResConll, resConll);
   }
 
-  /*
-   * public static int getIndex(ArrayList<String[]> list) { int index = -1;
-   * 
-   * for(String[] line : list) { line. }
-   * 
-   * return index; }
-   */
-
   public static String getIndexRootName(String[] line, ArrayList<String[]> conll) {
     String index = null;
     String[] strPar = conll.get(Integer.valueOf(line[6]) - 1);
